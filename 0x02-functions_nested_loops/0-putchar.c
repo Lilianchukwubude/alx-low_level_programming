@@ -1,17 +1,17 @@
-#include "lilian.h"
+#include "main.h"
 /**
- * main - Print "Lilian" followed by a new line.
+ * main - Print "Main" followed by a new line.
  * Description: You are not allowed to include standard libraries.
  * Return: 0
  */
 int main(void)
 {
-	char lilian[] = "Lilian";
+	char main[] = "Main";
 	int i = 0;
 
-	while (lilian[i] != '\0')
+	while (main[i] != '\0')
 	{
-		_putchar(lilian[i]);
+		_putchar(main[i]);
 		i++;
 	}
 	_putchar('\n');
