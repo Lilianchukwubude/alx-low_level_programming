@@ -1,26 +1,29 @@
 #include "main.h"
 
 /**
- * print_square - prints a square, followed by a new line;
- * @size: size of the square
+ * print_diagonal - draw a diagonal line
+ * @n: number of times the '\' char is printed
+ * Description: Can only use _putchar to print
  */
-void print_square(int size)
+void print_diagonal(int n)
 {
-	if (size <= 0)
-	{
-		_putchar('\n');
-	}
-	else
-	{
-		int i, j;
+	int c, i;
 
-		for (i = 0; i < size; i++)
+	c = 0;
+
+	while (n > 0)
+	{
+		i = c;
+		while (i > 0)
 		{
-			for (j = 0; j < size; j++)
-			{
-				_putchar('#');
-			}
-			_putchar('\n');
+			_putchar(' ');
+			i--;
 		}
+		_putchar('\\');
+		_putchar('\n');
+		c++;
+		n--;
 	}
+	if (c < 1)
+		_putchar('\n');
 }
