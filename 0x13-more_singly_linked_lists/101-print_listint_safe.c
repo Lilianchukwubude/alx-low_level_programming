@@ -1,72 +1,56 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include "lists.h"
-
 /**
- * free_listp2 - frees a linked list
- * @head: head of a list.
- *
- * Return: no return.
+ *unique_node_count - counts no. of unique nodes
+ *@head:pointer to a head node
+ *Return:number of unique nodes,otherwise 0
  */
-void free_listp2(listp_t **head)
+size_t unique_node_count(const listint_t *head)
 {
-	listp_t *temp;
-	listp_t *curr;
+	listint_t *hare, *tortoise;
+	size_t count = 1;
 
-	if (head != NULL)
+	if (head == NULL || head->next == NULL)
 	{
-		curr = *head;
-		while ((temp = curr) != NULL)
-		{
-			curr = curr->next;
-			free(temp);
-		}
-		*head = NULL;
+		return (0);
 	}
-}
-
-/**
- * free_listint_safe - frees a linked list.
- * @h: head of a list.
- *
- * Return: size of the list that was freed.
- */
-size_t free_listint_safe(listint_t **h)
-{
-	size_t nnodes = 0;
-	listp_t *hptr, *new, *add;
-	listint_t *curr;
-
-	hptr = NULL;
-	while (*h != NULL)
+	hare = head->next->next;
+	tortoise = head->next;
+	while (hare)
 	{
-		new = malloc(sizeof(listp_t));
-
-		if (new == NULL)
-			exit(98);
-
-		new->p = (void *)*h;
-		new->next = hptr;
-		hptr = new;
-
-		add = hptr;
-
-		while (add->next != NULL)
+		if (tortoise == hare)
 		{
-			add = add->next;
-			if (*h == add->p)
+			tortoise = head;
+			while (tortoise != hare)
 			{
-				*h = NULL;
-				free_listp2(&hptr);
-				return (nnodes);
+				count++;
+				tortoise = tortoise->next;
+				hare = hare->next;
 			}
-		}
+			tortoise = tortoise->next;
+			while (tortoise != hare)
+			{
+				count++;
+				tortoise = tortoise->next;
+			}
 
-		curr = *h;
-		*h = (*h)->next;
-		free(curr);
-		nnodes++;
+/**
+ *print_listint_safe - prints a listint list
+ *@head:pointer to head
+ *Return:number of nodes in list
+ */
+size_t print_listint_safe(const listint_t *head)
+{
+	unsigned int i = 0;
+
+	if (head == NULL)
+		exit(98);
+	while (head)
+	{
+		printf("[%p] %d", (void *)head, head->n);
+		i++;
+		head = head->next;
 	}
-
-	*h = NULL;
-	free_listp2(&hptr);
-	return (nnodes);
+	return (i);
 }
