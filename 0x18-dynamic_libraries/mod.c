@@ -1,4 +1,3 @@
- (15 sloc)  198 Bytes
 #include "main.h"
 /**
 * mod - adds two given integers
